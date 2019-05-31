@@ -1,0 +1,17 @@
+.navbar {
+   width:100%;
+   height: 60px;
+   line-height: 60px;
+   text-align: center;
+   display: flex;
+   position: fixed;
+   bottom:0;
+   font-size: 20px;
+   background: #e1e1e1;
+}
+.navbar div{
+   flex:1;
+}
+.active {
+   background: burlywood;
+}

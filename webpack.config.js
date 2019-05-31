@@ -1,11 +1,14 @@
 var webpack = require('webpack');
 module.exports = {
     entry: [
-        './app.js'
+        './app.page'
     ],
     output: {
         path: __dirname + '/build',
-        filename: "app.js"
+        filename: "app.page"
+    },
+    devServer: {
+        historyApiFallback: true
     },
     module: {
         rules: [{

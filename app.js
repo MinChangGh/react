@@ -1,25 +1,23 @@
-
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Home from './app/js/home.js'
-import './app/css/index.css'
+import RouterPage from './app/router/indexRouter.js'
+import './app/index.css'
+
 function c() {
-  document.documentElement.style.fontSize = document.documentElement.clientWidth / 5 + 'px';
+  document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
   console.log(document.documentElement.clientWidth)
 }
 
 c();
 
-window.onresize=function () {
+window.onresize = function () {
   c()
 }
 
-class App extends React.Component {
-  render() {
-    return (
-      <Home/>
-    )
-  }
-}
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(
+  <RouterPage/>,document.getElementById('root')
+)
+
+
+
