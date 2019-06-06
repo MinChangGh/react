@@ -5,7 +5,6 @@ import './app/index.css'
 
 function c() {
   document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
-  console.log(document.documentElement.clientWidth)
 }
 
 c();
@@ -16,7 +15,7 @@ window.onresize = function () {
 
 
 ReactDOM.render(
-  <RouterPage/>,document.getElementById('root')
+  <RouterPage/>, document.getElementById('root')
 )
 
 
