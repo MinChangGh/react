@@ -1,5 +1,7 @@
 import React from '_react@15.6.2@react'
 import './home.css'
+import List from '../../component/list'
+import Swiper from '../../component/swiper'
 
 
 class Home extends React.Component {
@@ -7,6 +9,24 @@ class Home extends React.Component {
     super()
     this.state = {
       list: [1, 2],
+      image: [
+        {
+          tip: '1',
+          img: '/app/image/1.jpeg'
+        },
+        {
+          tip: '2',
+          img: '/app/image/2.jpg'
+        },
+        {
+          tip: '3',
+          img: '/app/image/3.jpeg'
+        },
+        {
+          tip: '4',
+          img: '/app/image/4.jpeg'
+        }
+      ],
       obj: {
         a: 1
       },
@@ -15,23 +35,20 @@ class Home extends React.Component {
     }
     this.count = this.count.bind(this)
     this.toggle = this.toggle.bind(this)
+    this.FromChild = this.FromChild.bind(this)
   }
 
   componentWillMount() {
-    // let arr=[]
-    // for (let i =0;i<100;i++){
-    //   arr.push(i)
-    // }
-    // this.setState({
-    //   list:this.state.list = arr
-    // });
+
 
   }
 
   count() {
 
   }
-
+  FromChild (data) {
+    console.log(data)
+  }
   toggle (index) {
     setTimeout(()=>{
       this.setState({
@@ -41,14 +58,14 @@ class Home extends React.Component {
 
   }
   render() {
-
     return (
       <div>
+        {/*<List list={this.state.list} toChild={this.FromChild}></List>*/}
+        <Swiper image={this.state.image}></Swiper>
         <nav className="navbar">
           <div className={this.state.isActive==1? 'active': ''} onClick={this.toggle.bind(this,1)}>首页</div>
           <div className={this.state.isActive==2? 'active': ''} onClick={this.toggle.bind(this,2)}>列表</div>
         </nav>
-
       </div>
     )
   }
