@@ -17,6 +17,7 @@ class List extends React.Component {
   render() {
     return (
       <div>
+        <h2>list</h2>
         {this.props.list.map((item, index) => {
           return (
             <li onClick={this.PostToFa.bind(this, item)} key={index}>{item}</li>

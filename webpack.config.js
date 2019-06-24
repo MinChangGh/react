@@ -7,9 +7,10 @@ function resolve(dir) {
 
 module.exports = {
   entry: [
-    './app.js'
+   './app.js'
   ],
   output: {
+    publicPath:'/',
     path: __dirname + '/build',
     filename: "app.js"
   },
@@ -19,7 +20,14 @@ module.exports = {
     }
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxyTable: {
+      '/': {
+        target: 'localhost:90',
+        changeOrigin: true,
+        secure: false
+      }
+    },
   },
   module: {
     rules: [

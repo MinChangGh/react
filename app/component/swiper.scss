@@ -1,22 +1,22 @@
 .wrapper {
-  height: 250px;
+  height: 4rem;
   position: relative;
   overflow: hidden;
   .content {
     position: absolute;
     left:0;
     transition: ease 1s;
-    height: 250px;
+    height: 4rem;
     width: 5000px;
     display: flex;
     transform: translateX(-7.5rem);
     flex-direction: row;
     .imageBox {
-      height: 250px;
+      height: 4rem;
       width: 7.5rem;
       img{
         width: 7.5rem;
-        height: 250px;
+        height: 4rem;
       }
     }
   }

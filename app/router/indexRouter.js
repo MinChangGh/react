@@ -1,15 +1,19 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import {BrowserRouter, Route, Link, Switch,withRouter} from 'react-router-dom'
 import Home from '../page/InitPage/home.js'
-export default class RouterPage extends React.Component{
+import List from '../page/list/list.js'
+withRouter (Home)
+withRouter (List)
+export default class RouterPage extends React.Component {
   render() {
-    return(
+    return (
       <div>
-        <Router>
-          <Route path="/home" component={Home}></Route>
-          {/*<Route path="/" component={Home}></Route>*/}
-          {/*<Route path="/home" component={Home}></Route>*/}
-        </Router>
+        <BrowserRouter>
+          <Switch>
+            <Route  path="/list/:id?" component={List}></Route>
+            <Route  path="/home"  component={Home}></Route>
+          </Switch>
+        </BrowserRouter>
       </div>
     )
   }

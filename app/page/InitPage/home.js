@@ -1,9 +1,7 @@
 import React from '_react@15.6.2@react'
-import './home.css'
-import List from '../../component/list'
+import NavTab from '../../component/navTab'
+import  { Link, withRouter } from "react-router-dom"
 import Swiper from '../../component/swiper'
-
-
 class Home extends React.Component {
   constructor() {
     super()
@@ -34,13 +32,12 @@ class Home extends React.Component {
       isActive:1
     }
     this.count = this.count.bind(this)
-    this.toggle = this.toggle.bind(this)
+
     this.FromChild = this.FromChild.bind(this)
   }
 
   componentWillMount() {
-
-
+  //console.log(this.props.location.state.id)
   }
 
   count() {
@@ -62,13 +59,11 @@ class Home extends React.Component {
       <div>
         {/*<List list={this.state.list} toChild={this.FromChild}></List>*/}
         <Swiper image={this.state.image}></Swiper>
-        <nav className="navbar">
-          <div className={this.state.isActive==1? 'active': ''} onClick={this.toggle.bind(this,1)}>首页</div>
-          <div className={this.state.isActive==2? 'active': ''} onClick={this.toggle.bind(this,2)}>列表</div>
-        </nav>
+        <NavTab></NavTab>
+
       </div>
     )
   }
 }
 
-export default Home
+export default withRouter(Home)

@@ -2,8 +2,8 @@ import React from '_react@15.6.2@react'
 import './swiper.scss'
 
 class swiper extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.index = 1
     this.timer = null
     this.startx = Number
@@ -22,15 +22,7 @@ class swiper extends React.Component {
 
   componentDidMount() {
     let el = document.getElementById('content')
-    el.addEventListener("webkitTransitionEnd ",()=>{
-      console.log('ds')
-    })
-    setTimeout(() => {
-      //console.log(this.refs.content.style)
-      //console.log(getComputedStyle(this.refs.content,null).getPropertyValue('height'))
-    }, 1000)
-
-    // this.autoplay(this.refs.content, true)
+    this.autoplay(el, true)
   }
 
   componentDidUpdate() {
@@ -42,6 +34,7 @@ class swiper extends React.Component {
   }
 
   StartAction(e) {
+    this.autoplay(el, false)
     let font = this.font
     font = font.replace(/px/g, "").trim()
     this.startx = e.touches[0].clientX
@@ -54,46 +47,42 @@ class swiper extends React.Component {
   EndAction(e) {
     let el = this.refs.content
     let len = this.props.image.length
-    let reset = ()=>{
+    let reset = () => {
       this.index = 1
       el.style.transition = `0s`
       el.style.transform = `translateX(${-7.5 * (this.index)}rem)`
-      el.removeEventListener('transitionend',reset)
+      el.removeEventListener('transitionend', reset)
     }
-
-    let reset0 = ()=>{
-      this.index = len-2
+    let reset0 = () => {
+      this.index = len - 2
       el.style.transition = `0s`
       el.style.transform = `translateX(${-7.5 * (this.index)}rem)`
-      el.removeEventListener('transitionend',reset0)
+      el.removeEventListener('transitionend', reset0)
     }
-
     let dif = this.startx - e.changedTouches[0].clientX
     if (Math.abs(dif) >= 100) {
       if (dif > 0) {   // 大于0 时 向左滑动
-        // this.autoplay(this.refs.content, false)
         // 处理
         this.index++
-        if (this.index == len-1) {
-          el.style.transition = `0.5s`
+        if (this.index == len - 1) {
+          el.style.transition = `0.1s`
           el.style.transform = `translateX(${-7.5 * (this.index)}rem)`
-          el.addEventListener("transitionend",reset)
-
+          el.addEventListener("transitionend", reset)
         } else {
           // 正常滑动
-          el.style.transition = `0.5s`
+          el.style.transition = `0.1s`
           el.style.transform = `translateX(${-7.5 * (this.index)}rem)`
 
         }
 
       } else {
-        //this.autoplay(el, false)
+
         // 向右滑动
         this.index--
         if (this.index == 0) {
           el.style.transition = `0.5s`
           el.style.transform = `translateX(${-7.5 * (this.index)}rem)`
-          el.addEventListener("transitionend",reset0)
+          el.addEventListener("transitionend", reset0)
 
         } else {
           // 正常滑动
@@ -108,8 +97,10 @@ class swiper extends React.Component {
       // 滑动距离过小还原至原来的位置
       el.style.transition = `0.5s`
       el.style.transform = `translate(${-7.5 * (this.index)}rem)`
-
     }
+    setTimeout(() => {
+      this.autoplay(el, true)
+    }, 1000)
   }
 
   MoveAction(e) {
@@ -120,19 +111,19 @@ class swiper extends React.Component {
     distance = distance / font  // 获取位移rem
     el.style.transition = "0s"
     el.style.transform = `translate(${-distance + this.CurLen}rem)`
-
   }
 
   autoplay(el, flag) {
     let len = this.props.image.length
     if (this.timer) {
       clearInterval(this.timer)
+      this.timer = null
     } else {
       if (flag) {
         this.timer = setInterval(() => {
           this.index++
-          if (this.index == len) {
-            el.style.transition = `1s`
+          if (this.index == len - 1) {
+            el.style.transition = `0.2s`
             el.style.transform = `translate(${-7.5 * (this.index - 1)}rem)`
             setTimeout(() => {
               this.index = 1
@@ -140,7 +131,7 @@ class swiper extends React.Component {
               el.style.transform = `translate(${-7.5 * (this.index - 1)}rem)`
             }, 1000)
           } else {
-            el.style.transition = `1s`
+            el.style.transition = `0.2s`
             el.style.transform = `translate(${-7.5 * (this.index - 1)}rem)`
           }
 
@@ -156,9 +147,10 @@ class swiper extends React.Component {
   render() {
     let OraImage = this.props.image
     OraImage.push(this.props.image[0])
-    OraImage.unshift(this.props.image[this.props.image.length-2])
+    OraImage.unshift(this.props.image[this.props.image.length - 2])
     return (
       <div className="wrapper">
+        {this.props.children}
         <div id="content" className='content' ref='content'>
           {
             OraImage.map((item, index) => {
@@ -174,7 +166,6 @@ class swiper extends React.Component {
             })
           }
         </div>
-
       </div>
     )
   }
