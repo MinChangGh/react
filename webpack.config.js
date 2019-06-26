@@ -21,13 +21,14 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    proxyTable: {
-      '/': {
-        target: 'localhost:90',
-        changeOrigin: true,
-        secure: false
-      }
-    },
+    port:'9000'
+    // proxy: {
+    //   '/': {
+    //     target: 'http://192.168.1.123:90/',
+    //     changeOrigin: true,
+    //     secure: false
+    //   }
+    // },
   },
   module: {
     rules: [

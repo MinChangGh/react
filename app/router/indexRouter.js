@@ -12,6 +12,7 @@ export default class RouterPage extends React.Component {
           <Switch>
             <Route  path="/list/:id?" component={List}></Route>
             <Route  path="/home"  component={Home}></Route>
+            <Route  path="/"  component={Home}></Route>
           </Switch>
         </BrowserRouter>
       </div>

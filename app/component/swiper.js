@@ -15,14 +15,28 @@ class swiper extends React.Component {
       timer: null,
       swiper: {
         curIndex: 1
-      }
+      },
+      image:[]
 
     }
   }
 
+  componentWillReceiveProps (nprops) {
+    let OraImage = nprops.image
+    OraImage.push(nprops.image[0])
+    OraImage.unshift(nprops.image[nprops.image.length - 2])
+    this.setState({
+      image:OraImage
+    })
+  }
+
   componentDidMount() {
-    let el = document.getElementById('content')
-    this.autoplay(el, true)
+    setTimeout(()=>{
+      let el = document.getElementById('content')
+      this.autoplay(el, true)
+    },20)
+
+
   }
 
   componentDidUpdate() {
@@ -145,22 +159,21 @@ class swiper extends React.Component {
   }
 
   render() {
-    let OraImage = this.props.image
-    OraImage.push(this.props.image[0])
-    OraImage.unshift(this.props.image[this.props.image.length - 2])
+
+
     return (
       <div className="wrapper">
         {this.props.children}
         <div id="content" className='content' ref='content'>
           {
-            OraImage.map((item, index) => {
+            this.state.image.map((item, index) => {
               return (
                 <div
                   onTouchStart={this.StartAction.bind(this)}
                   onTouchEnd={this.EndAction.bind(this)}
                   onTouchMove={this.MoveAction.bind(this)}
                   className="imageBox" key={index}>
-                  <img src={item.img}/>
+                  <img src={item.image_url}/>
                 </div>
               )
             })
