@@ -14,7 +14,7 @@ import Init from "../page";
 export default class RouterPage extends React.Component {
     render() {
         return (
-            <div>
+            <div className='init-router'>
 
                 <BrowserRouter>
                     <Switch>

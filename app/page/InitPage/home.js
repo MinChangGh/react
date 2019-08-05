@@ -1,7 +1,7 @@
 import React from '_react@15.6.2@react'
 
 import {Link, withRouter} from "react-router-dom"
-import {getbanner} from "../../api/api";
+import {getbanner} from "../../api/baseApi";
 import store from '../../store/store'
 
 class Home extends React.Component {

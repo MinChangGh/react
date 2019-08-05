@@ -1,0 +1,13 @@
+.init {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .topbar{
+    flex:0 1 50px;
+  }
+  .content{
+    flex: 1;
+    background: aliceblue;
+  }
+}

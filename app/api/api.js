@@ -1,40 +1,20 @@
-
-import axios from 'axios'
-
-const service = axios.create({
-    baseURL: 'http://192.168.1.173:90' , // api的base_url
-    timeout: 5000, // request timeout
-    withCredentials: true,
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        'X-Requested-With': 'XMLHttpRequest'
-    }
-})
-
-service.interceptors.request.use(config => {
-
-    return config
-}, error => {
-    console.log(error);
-    Promise.reject(error);
-})
-
-service.interceptors.response.use(
-    response => response,
-    error => {
-        console.log('err' + error);
-
-        return Promise.reject(error)
-    })
-
-export default service;
-
+import service from "./baseApi";
+import qs from 'qs';
 
 export function getbanner(data) {
-    return service({
-        url: '/getbanner',
-        method: 'post',
-        data
-    })
+  return service({
+    url: '/getbanner',
+    method: 'post',
+    data
+  })
+
+}
+
+export function findGoods(data) {
+  return service({
+    url: '/findGoods',
+    method: 'post',
+    data:qs.stringify(data)
+  })
 
 }

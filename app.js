@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import 'antd/dist/antd.css';
 import RouterPage from './app/router/indexRouter.js'
-import './app/index.css'
+import './app/style/index.scss'
 
 
 // function c() {
