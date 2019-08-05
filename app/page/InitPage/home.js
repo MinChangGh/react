@@ -1,8 +1,8 @@
 import React from '_react@15.6.2@react'
-import NavTab from '../../component/navTab'
+
 import {Link, withRouter} from "react-router-dom"
-import Swiper from '../../component/swiper'
 import {getbanner} from "../../api/api";
+import store from '../../store/store'
 
 class Home extends React.Component {
   constructor() {
@@ -20,18 +20,14 @@ class Home extends React.Component {
   }
 
   componentWillMount () {
-    getbanner().then((res) => {
-      this.setState({
-        image: this.state.image.concat(res.data)
-      })
 
-    })
+
   }
 
   toggle(index) {
     setTimeout(() => {
       this.setState({
-        isActive: this.state.isActive = index
+        isActive:  index
       })
     }, 10)
   }
@@ -39,8 +35,8 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <Swiper image={this.state.image}></Swiper>
-        <NavTab></NavTab>
+        <Link to="/home">home</Link><br/>
+        <Link to="/list/2">list</Link>
       </div>
     )
   }
