@@ -18,12 +18,14 @@ export default class RouterPage extends React.Component {
 
                 <BrowserRouter>
                     <Switch>
-                        <Redirect path="/"  exact={true} to="/init"/>
-                        <Route path="/init" component={Init}></Route>
-                        <Route path="/MyLoan/:agument" component={MyLoan}></Route>
-                        <Route path="/MyBean" component={MyBean}></Route>
-                        <Route path="/MyOrder" component={MyOrder}></Route>
-                        <Route path="/home" component={Home}></Route>
+                        {/*<Redirect path="/"  exact={true} to="/init"/>*/}
+                        <Route path="/init" component={Init}>
+                            <Route path="/init/MyBean" component={MyBean}></Route>
+                        </Route>
+                        {/*<Route path="init/MyLoan/:agument" component={MyLoan}></Route>*/}
+
+                        {/*<Route path="/MyOrder" component={MyOrder}></Route>*/}
+                        {/*<Route path="/home" component={Home}></Route>*/}
                     </Switch>
                 </BrowserRouter>
 

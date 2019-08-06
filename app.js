@@ -1,8 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import 'antd/dist/antd.css';
-import RouterPage from './app/router/indexRouter.js'
+import { Provider } from 'react-redux'
+import Init from './app/page/index'
 import './app/style/index.scss'
+import RouterPage from './app/router/indexRouter'
+import store from './app/store/store'
 
 
 // function c() {
@@ -17,7 +20,10 @@ import './app/style/index.scss'
 
 
 ReactDOM.render(
-  <RouterPage/>, document.getElementById('root')
+  <Provider store={store}>
+    <RouterPage/>
+  </Provider>
+  , document.getElementById('root')
 )
 
 

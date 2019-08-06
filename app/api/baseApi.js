@@ -1,6 +1,5 @@
 
 import axios from 'axios'
-console.log('ds')
 
 const service = axios.create({
     baseURL: 'http://localhost:90' , // api的base_url

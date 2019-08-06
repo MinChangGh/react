@@ -1,8 +1,8 @@
 import { createStore } from 'redux'
-import {firDu} from "./reducer";
+import { search } from "./reducer";
 
 
 
-let store = createStore(firDu)
+let store = createStore(search)
 
 export default store;

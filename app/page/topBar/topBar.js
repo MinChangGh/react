@@ -2,14 +2,25 @@ import React from '_react@15.6.2@react'
 import './topbar.scss'
 import {Link, withRouter} from 'react-router-dom'
 import {Menu, Dropdown, Icon, Row, Col} from 'antd'
+import {connect} from 'react-redux'
+import store from '../../store/store'
 
 class TopBar extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
+        this.state = {
+          a:1
+        }
     }
 
     componentWillMount() {
-        this.getPosition()
+      this.props.dispatch({
+        type:'SEARCH',
+        txt:'鞋子'
+      })
+
+      console.log(store.getState())
+
     }
 
     getPosition() {
@@ -45,7 +56,7 @@ class TopBar extends React.Component {
         return (
             <div className='topbar'>
 
-                <div className='address'>杭州</div>
+                <div className='address' onClick={this.toBean.bind(this)}>杭州</div>
                 <div className='right'>
                     <div className='login'>登录</div>
 
@@ -63,4 +74,10 @@ class TopBar extends React.Component {
     }
 }
 
-export default withRouter(TopBar);
+function co(store) {
+  return {
+    a:store.user
+  }
+}
+
+export default withRouter (connect(co)(TopBar)) ;
