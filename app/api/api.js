@@ -18,3 +18,12 @@ export function findGoods(data) {
   })
 
 }
+
+export function getList(data) {
+  return service({
+    url: '/getList',
+    method: 'get',
+    data
+  })
+
+}

@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import 'antd/dist/antd.css';
-import { Provider } from 'react-redux'
-import Init from './app/page/index'
+import {Provider} from 'react-redux'
 import './app/style/index.scss'
 import RouterPage from './app/router/indexRouter'
 import store from './app/store/store'

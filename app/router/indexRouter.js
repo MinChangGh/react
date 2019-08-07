@@ -1,35 +1,20 @@
 import React from 'react'
-import { createBrowserHistory } from 'history';
-import {BrowserRouter, Route, Link, Switch, withRouter, Redirect} from 'react-router-dom'
-import {Provider} from 'react-redux'
-import store from '../store/store'
-import Home from '../page/InitPage/home.js'
-import List from '../page/list/list.js'
-import MyLoan from '../page/aboutMe/myLoan'
-import MyBean from '../page/aboutMe/myBean'
-import MyOrder from '../page/aboutMe/myOrder'
-
+import {BrowserRouter, Route, Link, Switch} from 'react-router-dom'
 import Init from "../page";
+import Detail from '../page/detail/detail'
 
 export default class RouterPage extends React.Component {
-    render() {
-        return (
-            <div className='init-router'>
+  render() {
+    return (
+      <div className='init-router'>
 
-                <BrowserRouter>
-                    <Switch>
-                        {/*<Redirect path="/"  exact={true} to="/init"/>*/}
-                        <Route path="/init" component={Init}>
-                            <Route path="/init/MyBean" component={MyBean}></Route>
-                        </Route>
-                        {/*<Route path="init/MyLoan/:agument" component={MyLoan}></Route>*/}
-
-                        {/*<Route path="/MyOrder" component={MyOrder}></Route>*/}
-                        {/*<Route path="/home" component={Home}></Route>*/}
-                    </Switch>
-                </BrowserRouter>
-
-            </div>
-        )
-    }
+        <BrowserRouter>
+          <Switch>
+            <Route path="/base" component={Init}></Route>
+            <Route path="/detail/:id" component={Detail}></Route>
+          </Switch>
+        </BrowserRouter>
+      </div>
+    )
+  }
 }
