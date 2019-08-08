@@ -1,9 +1,9 @@
 import React from '_react@15.6.2@react'
 import TopBar from './topBar/topBar'
 import './init.scss'
-import {findGoods} from '../api/api'
+import {findGoods, upload} from '../api/api'
 import MyBean from "./aboutMe/myBean";
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import MyLoan from './aboutMe/myLoan'
 import MyOrder from './aboutMe/myOrder'
 import Slide from './slide/slide'
@@ -29,6 +29,25 @@ class Init extends React.Component {
     })
   }
 
+  handelFile(e) {
+    let file = e.target.files[0]
+    let size = file.size
+    var shardSize = 4 * 1024 * 1024,    //以2MB为一个分片
+    shardCount = Math.ceil(size / shardSize);
+    for (let i = 0; i<shardCount; i++) {
+      var start = i * shardSize,
+      end = Math.min(size, start + shardSize);
+      let myData = new FormData()
+      myData.append('fl', file.slice(start,end))
+      myData.append('index',i+1)
+      myData.append('all',shardCount)
+      upload(myData).then((res) => {
+        console.log(res)
+      })
+    }
+
+  }
+
   Search() {
     if (this.state.searchTxt != '') {
       let data = {
@@ -48,8 +67,13 @@ class Init extends React.Component {
       <div className='init'>
         <TopBar></TopBar>
         <div className='search-wrapper'>
-          <input onChange={(event)=>{this.handleSearch(event)}} name='searchTxt' type="text"/>
+          <input onChange={(event) => {
+            this.handleSearch(event)
+          }} name='searchTxt' type="text"/>
           <button onClick={this.Search.bind(this)}>搜索</button>
+          <input onChange={(e) => {
+            this.handelFile(e)
+          }} id="upload" type="file"/>
         </div>
 
         <div className='content-wrapper'>
@@ -62,7 +86,6 @@ class Init extends React.Component {
           <Route path={`${this.props.match.path}/mybean`} exact component={MyBean}></Route>
           <Route path={`${this.props.match.path}/myloan/:id`} exact component={MyLoan}></Route>
         </Switch>
-
 
 
       </div>

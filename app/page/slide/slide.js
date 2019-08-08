@@ -17,7 +17,6 @@ class Slide extends React.Component{
         <li>夏季</li>
       </div>
     )
-
   }
 }
 

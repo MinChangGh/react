@@ -7,7 +7,6 @@ export function getbanner(data) {
     method: 'post',
     data
   })
-
 }
 
 export function findGoods(data) {
@@ -16,14 +15,20 @@ export function findGoods(data) {
     method: 'post',
     data:qs.stringify(data)
   })
-
 }
-
+// 获取列表
 export function getList(data) {
   return service({
     url: '/getList',
     method: 'get',
     data
   })
-
+}
+// upload
+export function upload(data) {
+  return service({
+    url: '/upload',
+    method: 'post',
+    data
+  })
 }
