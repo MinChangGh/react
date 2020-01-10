@@ -6,8 +6,7 @@ import Detail from '../page/detail/detail'
 export default class RouterPage extends React.Component {
   render() {
     return (
-      <div className='init-router'>
-
+      <div style={{height: '100%'}}>
         <BrowserRouter>
           <Switch>
             <Route path="/base" component={Init}></Route>

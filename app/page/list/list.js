@@ -23,7 +23,6 @@ class List extends React.Component {
     })
   }
   toDetail (info) {
-    console.log(info)
     this.props.history.push({pathname: `/detail/${info.product_id}`});
   }
 
