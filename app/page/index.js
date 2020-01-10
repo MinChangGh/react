@@ -1,6 +1,7 @@
 import React from '_react@15.6.2@react'
 import TopBar from './topBar/topBar'
 import './init.scss'
+import { api } from '@/api/api2'
 import {findGoods, upload} from '../api/api'
 import MyBean from "./aboutMe/myBean";
 import {Route, Switch} from 'react-router-dom'
@@ -20,8 +21,7 @@ class Init extends React.Component {
   }
 
   componentWillMount() {
-
-
+    this.getGoodsType()
   }
 
   handleSearch(e) {
@@ -46,7 +46,11 @@ class Init extends React.Component {
         console.log(res)
       })
     }
-
+  }
+  getGoodsType () {
+    api.get({},'/getType',(res)=>{
+      console.log(res)
+    })
   }
 
   Search() {

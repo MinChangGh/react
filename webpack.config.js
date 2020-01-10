@@ -2,7 +2,8 @@ var webpack = require('webpack');
 var path = require('path')
 
 function resolve(dir) {
-  return path.join(__dirname, '..', dir)
+  console.log(path.join(__dirname, dir))
+  return path.join(__dirname, dir)
 }
 
 module.exports = {
@@ -20,6 +21,14 @@ module.exports = {
     }
   },
   devServer: {
+    proxyTable: {
+      '/': {
+        //target: 'http://192.168.0.119:8092/gaa-jinhua', //djy
+        target: 'http://192.168.0.173:90', //me
+        // target: 'http://192.168.0.181:8092/gaa-jinhua', // zp
+        changeOrigin: true
+      }
+    },
     historyApiFallback: true,
     port:'9000'
     // proxy: {
