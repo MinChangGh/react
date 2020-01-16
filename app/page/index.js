@@ -1,14 +1,15 @@
 import React from '_react@15.6.2@react'
-import TopBar from './topBar/topBar'
+import StoreTopBar from './topBar/topBar'
 import './init.scss'
-import { api } from '@/api/api2'
+import {api} from '@/api/api2'
 import {findGoods, upload} from '../api/api'
 import MyBean from "./aboutMe/myBean";
 import {Route, Switch} from 'react-router-dom'
 import MyLoan from './aboutMe/myLoan'
 import MyOrder from './aboutMe/myOrder'
-import {Breadcrumb, Icon, Layout, Menu, Input} from 'antd';
-const { Search } = Input;
+import {Carousel, Icon, Input, Layout, Menu} from 'antd';
+
+const {Search} = Input;
 const {SubMenu} = Menu;
 const {Header, Footer, Sider, Content} = Layout;
 
@@ -16,12 +17,21 @@ class Init extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      searchTxt: ''
+      searchTxt: '',
+      typeList: [],
+      bannerList: [],
+      lowPrice: [],
+      left: 0,
+      styl: {
+        left: 0
+      }
     }
   }
 
   componentWillMount() {
     this.getGoodsType()
+    this.getBanner()
+    this.getLowPrice()
   }
 
   handleSearch(e) {
@@ -47,9 +57,50 @@ class Init extends React.Component {
       })
     }
   }
-  getGoodsType () {
-    api.get({},'/getType',(res)=>{
-      console.log(res)
+
+  getLowPrice() {
+    api.get({}, '/api/getLow').then((res) => {
+      this.setState({
+        lowPrice: res
+      })
+    })
+  }
+
+  getBanner() {
+    api.get({}, '/api/getBanner').then((res) => {
+      this.setState({
+        bannerList: res
+      })
+    })
+  }
+
+  getGoodsType() {
+    api.get({}, '/api/getType').then((res) => {
+      this.setState({
+        typeList: res
+      })
+    })
+  }
+
+  right() {
+    this.setState({
+      left: this.state.left - 210
+    })
+    this.setState({
+      styl: {
+        left: `${this.state.left}px`
+      }
+    })
+  }
+
+  left() {
+    this.setState({
+      left: this.state.left + 210
+    })
+    this.setState({
+      styl: {
+        left: `${this.state.left}px`
+      }
     })
   }
 
@@ -60,7 +111,6 @@ class Init extends React.Component {
       }
       this.props.history.location.push({pathname: "/list"})
       findGoods(data).then(res => {
-
       }).catch(err => {
 
       })
@@ -68,8 +118,45 @@ class Init extends React.Component {
   }
 
   render() {
+    const lowPrice = (
+    <div>
+      <h4>秒杀</h4>
+      <div className='low-price'>
+        <p className='r-arrow'><Icon onClick={this.right.bind(this)} type="right-circle"/></p>
+        <span className='l-arrow'><Icon onClick={this.left.bind(this)} type="left-circle"/></span>
+        <ul ref='scrollBar' style={this.state.styl}>
+          {this.state.lowPrice.map((item, index) => {
+            return (
+            <li key={item.product_id} className='low-li'><img src={item.product_img_url}/></li>
+            )
+          })}
+        </ul>
+      </div>
+
+    </div>
+    )
+    const banner = (
+    <div className='banner'>
+      <Carousel autoplay>
+        {this.state.bannerList.map((item, index) => {
+          return (
+          <div className='banner-wrap' key={item.product_id}>
+            <img src={item.product_img_url}/>
+          </div>
+          )
+        })}
+      </Carousel>
+    </div>
+    )
     const goodsType = (
     <div className='goods-type'>
+      {this.state.typeList.map((item, index) => {
+        return (
+        <p key={item.category_id} className='tag-wrap'>
+          <span>{item.category_name}</span>|
+        </p>
+        )
+      })}
 
     </div>
     )
@@ -77,108 +164,24 @@ class Init extends React.Component {
     <div className='init'>
       <Layout>
         <Header>
-          <TopBar></TopBar>
+          <StoreTopBar></StoreTopBar>
         </Header>
         <Content className='main-content'>
           <div className='search-wrap'>
-            {/*<Icon style={{fontSize: '50px', color: '#f96c3c'}} type="taobao-circle" />*/}
             <div className='input-wrap'>
               <input className='search-index' type="text"/>
               <div className='index-btn'>搜索</div>
             </div>
           </div>
-          <div style={{height: '900px'}}></div>
-          {goodsType}
+          <div className='banner-wrap'>
+            {goodsType}
+            {banner}
+          </div>
+          <div className='low-wrap'>
+            {lowPrice}
+          </div>
         </Content>
-        {/*<Layout>*/}
-        {/*  <Sider width={200} style={{background: '#fff'}}>*/}
-        {/*    <Menu*/}
-        {/*    mode="inline"*/}
-        {/*    defaultSelectedKeys={['1']}*/}
-        {/*    defaultOpenKeys={['sub1']}*/}
-        {/*    style={{height: '100%', borderRight: 0}}*/}
-        {/*    >*/}
-        {/*      <SubMenu*/}
-        {/*      key="sub1"*/}
-        {/*      title={*/}
-        {/*        <span>*/}
-        {/*        <Icon type="user"/>*/}
-        {/*        subnav 1*/}
-        {/*      </span>*/}
-        {/*      }*/}
-        {/*      >*/}
-        {/*        <Menu.Item key="1">option1</Menu.Item>*/}
-        {/*        <Menu.Item key="2">option2</Menu.Item>*/}
-        {/*        <Menu.Item key="3">option3</Menu.Item>*/}
-        {/*        <Menu.Item key="4">option4</Menu.Item>*/}
-        {/*      </SubMenu>*/}
-        {/*      <SubMenu*/}
-        {/*      key="sub2"*/}
-        {/*      title={*/}
-        {/*        <span>*/}
-        {/*        <Icon type="laptop"/>*/}
-        {/*        subnav 2*/}
-        {/*      </span>*/}
-        {/*      }*/}
-        {/*      >*/}
-        {/*        <Menu.Item key="5">option5</Menu.Item>*/}
-        {/*        <Menu.Item key="6">option6</Menu.Item>*/}
-        {/*        <Menu.Item key="7">option7</Menu.Item>*/}
-        {/*        <Menu.Item key="8">option8</Menu.Item>*/}
-        {/*      </SubMenu>*/}
-        {/*      <SubMenu*/}
-        {/*      key="sub3"*/}
-        {/*      title={*/}
-        {/*        <span>*/}
-        {/*        <Icon type="notification"/>*/}
-        {/*        subnav 3*/}
-        {/*      </span>*/}
-        {/*      }*/}
-        {/*      >*/}
-        {/*        <Menu.Item key="9">option9</Menu.Item>*/}
-        {/*        <Menu.Item key="10">option10</Menu.Item>*/}
-        {/*        <Menu.Item key="11">option11</Menu.Item>*/}
-        {/*        <Menu.Item key="12">option12</Menu.Item>*/}
-        {/*      </SubMenu>*/}
-        {/*    </Menu>*/}
-        {/*  </Sider>*/}
-        {/*  <Layout >*/}
-        {/*    /!*<Breadcrumb style={{margin: '16px 0'}}>*!/*/}
-        {/*    /!*  <Breadcrumb.Item>Home</Breadcrumb.Item>*!/*/}
-        {/*    /!*  <Breadcrumb.Item>List</Breadcrumb.Item>*!/*/}
-        {/*    /!*  <Breadcrumb.Item>App</Breadcrumb.Item>*!/*/}
-        {/*    /!*</Breadcrumb>*!/*/}
-        {/*    <Content*/}
-        {/*    style={{*/}
-        {/*      background: '#fff',*/}
-        {/*      padding: 24,*/}
-        {/*      margin: 0,*/}
-        {/*      height: '100%'*/}
-        {/*    }}*/}
-        {/*    >*/}
-        {/*      Content*/}
-        {/*    </Content>*/}
-        {/*  </Layout>*/}
-        {/*</Layout>*/}
-
-
       </Layout>
-
-      {/*<div className='search-wrapper'>*/}
-      {/*  <input onChange={(event) => {*/}
-      {/*    this.handleSearch(event)*/}
-      {/*  }} name='searchTxt' type="text"/>*/}
-      {/*  <button onClick={this.Search.bind(this)}>搜索</button>*/}
-      {/*  <input onChange={(e) => {*/}
-      {/*    this.handelFile(e)*/}
-      {/*  }} id="upload" type="file"/>*/}
-      {/*</div>*/}
-
-      {/*<div className='content-wrapper'>*/}
-      {/*  <Slide></Slide>*/}
-      {/*  <List></List>*/}
-      {/*</div>*/}
-
       <Switch>
         <Route path={`${this.props.match.path}/myorder`} exact component={MyOrder}></Route>
         <Route path={`${this.props.match.path}/mybean`} exact component={MyBean}></Route>

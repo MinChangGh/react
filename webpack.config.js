@@ -21,12 +21,12 @@ module.exports = {
     }
   },
   devServer: {
-    proxyTable: {
-      '/': {
+    proxy: {
+      '/api': {
         //target: 'http://192.168.0.119:8092/gaa-jinhua', //djy
-        target: 'http://192.168.0.173:90', //me
+        target: 'http://192.168.0.173:90/', //me
         // target: 'http://192.168.0.181:8092/gaa-jinhua', // zp
-        changeOrigin: true
+        changeOrigin: true,
       }
     },
     historyApiFallback: true,

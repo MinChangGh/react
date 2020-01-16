@@ -8,9 +8,7 @@ const searchs = {
 function search(state=searchs,action) {
     switch (action.type) {
         case 'SEARCH':
-            return {
-                ...state
-            }
+            return Object.assign(state, action.data)
             break;
         default:
             return state

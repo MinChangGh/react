@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter, Route, Link, Switch} from 'react-router-dom'
+import {BrowserRouter, Route, Link, Switch, Redirect} from 'react-router-dom'
 import Init from "../page";
 import Detail from '../page/detail/detail'
 
@@ -9,6 +9,7 @@ export default class RouterPage extends React.Component {
       <div style={{height: '100%'}}>
         <BrowserRouter>
           <Switch>
+            <Route path="/" component={Init} exact />
             <Route path="/base" component={Init}></Route>
             <Route path="/detail/:id" component={Detail}></Route>
           </Switch>

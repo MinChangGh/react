@@ -44,27 +44,104 @@
         cursor: pointer;
       }
     }
-  }
+    .banner-wrap {
+      display: flex;
+      height: 450px;
+      width: 1200px;
+      box-sizing: border-box;
+      margin: 0 auto;
+      .goods-type {
+        width: 200px;
 
-  .content-wrapper {
-    width: 100%;
-    display: flex;
-    padding: 0 20px;
-    .slide{
-      flex: 0 1 ;
-    }
-    .list-page{
-      flex:0 1 1400px;
-    }
-    .topbar {
-      flex: 0 1 50px;
-    }
-    .content {
-      flex: 1;
-      background: aliceblue;
-      .slide{
-
+        background: antiquewhite;
+        .tag-wrap {
+          display: inline-block;
+          line-height: 30px;
+          span {
+            padding: 0 10px;
+            cursor: pointer;
+          }
+        }
       }
+      .banner {
+        width: 1000px;
+        height: 450px;
+        .banner-wrap {
+          img {
+            width: 500px;
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+    .low-wrap {
+      width: 1200px;
+      margin: 0 auto;
+      h4 {
+        font-weight: 600;
+        line-height: 30px;
+        margin-top: 10px;
+      }
+
+      .low-price {
+        position: relative;
+        width: 1200px;
+        height: 200px;
+        overflow: hidden;
+        &:hover .r-arrow{
+          display: block;
+          z-index: 100;
+          cursor: pointer;
+        }
+        &:hover .l-arrow{
+          display: block !important;
+          cursor: pointer;
+          z-index: 100;
+        }
+        ul {
+          display: flex;
+          position: absolute;
+          height: 200px;
+          transition: .5s;
+          left: 0;
+        }
+        .r-arrow {
+          width: 70px;
+          height: 200px;
+          text-align: center;
+          line-height: 200px;
+          position: absolute;
+          right: 0;
+          font-size: 50px;
+          color: #ffffff;
+          opacity: 0.5;
+          background:  rgba(0, 0, 0, 0.9);
+          display: none;
+        }
+        .l-arrow {
+          width: 70px;
+          height: 200px;
+          text-align: center;
+          line-height: 200px;
+          position: absolute;
+          left: 0;
+          font-size: 50px;
+          color: #ffffff;
+          opacity: 0.5;
+          background:  rgba(0, 0, 0, 0.9);
+          //display: none;
+        }
+        .low-li{
+          width: 200px;
+          height: 200px;
+          margin-right: 10px;
+          img {
+            width: 200px;
+            height: auto;
+          }
+        }
+      }
+
     }
   }
 
