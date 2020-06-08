@@ -19,7 +19,6 @@ class StoreTopBar extends React.Component {
   }
 
   componentWillMount() {
-    console.log(this)
     store.dispatch({
       type: 'SEARCH',
       data: {

@@ -32,6 +32,10 @@ class Init extends React.Component {
     this.getGoodsType()
     this.getBanner()
     this.getLowPrice()
+    localStorage.post = 1
+    window.addEventListener('message', function (e) {
+      console.log(e.data);
+    });
   }
 
   handleSearch(e) {

@@ -30,7 +30,8 @@ module.exports = {
       }
     },
     historyApiFallback: true,
-    port:'9000'
+    port:'9999',
+    hot: true
     // proxy: {
     //   '/': {
     //     target: 'http://192.168.1.123:90/',
@@ -59,5 +60,10 @@ module.exports = {
         loader: "style-loader!css-loader!sass-loader"
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin({
+      // Options...
+    })
+  ]
 };
